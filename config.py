@@ -2,13 +2,15 @@ import numpy as np
 import random
 import torch
 import argparse
+import os
 
-
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' #两张卡训练
 RAW_DATASET_ROOT_FOLDER = 'data'
 EXPERIMENT_ROOT = 'experiments'
 STATE_DICT_KEY = 'model_state_dict'
 OPTIMIZER_STATE_DICT_KEY = 'optimizer_state_dict'
 PROJECT_NAME = 'llmrec'
+
 
 
 def set_template(args):
@@ -119,8 +121,8 @@ parser.add_argument('--bert_mask_prob', type=float, default=0.25)
 ################
 # LLM Model
 ################
-parser.add_argument('--llm_base_model', type=str, default='meta-llama/Llama-2-7b-hf')
-parser.add_argument('--llm_base_tokenizer', type=str, default='meta-llama/Llama-2-7b-hf')
+parser.add_argument('--llm_base_model', type=str, default='TinyLlama/TinyLlama-1.1B-Chat-v1.0') #使用更小的模型TinyLlama，基于llma架构但是参数量更小
+parser.add_argument('--llm_base_tokenizer', type=str, default='TinyLlama/TinyLlama-1.1B-Chat-v1.0') 
 parser.add_argument('--llm_max_title_len', type=int, default=32)
 parser.add_argument('--llm_max_text_len', type=int, default=1536)
 parser.add_argument('--llm_max_history', type=int, default=20)
