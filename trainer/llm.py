@@ -102,7 +102,7 @@ class LLMTrainer(Trainer):
             warmup_steps=args.warmup_steps,
             num_train_epochs=args.lora_num_epochs,
             learning_rate=args.lora_lr,
-            bf16=True,
+            bf16=False, # 改为False，以解决cuda版本的问题
             logging_steps=10,
             optim="paged_adamw_32bit",
             evaluation_strategy="steps",
