@@ -25,10 +25,11 @@ def set_template(args):
         args.bert_max_len = 50
 
     if 'llm' in args.model_code: 
-        batch = 16 if args.dataset_code == 'ml-100k' else 12
+        batch = 8 if args.dataset_code == 'ml-100k' else 12
         args.lora_micro_batch_size = batch
     else: 
-        batch = 16 if args.dataset_code == 'ml-100k' else 64
+        batch = 8 if args.dataset_code == 'ml-100k' else 64 #调整batch_size适应更小显存GPU
+        
 
     args.train_batch_size = batch
     args.val_batch_size = batch
